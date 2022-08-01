@@ -5,13 +5,20 @@
 }
 
 .identitas{
-    background-color: blueviolet;
+    background-color: antiquewhite;
     padding: 5px 10px;
     border: 1px solid crimson;
     width: 150px;
+    height: 150px;
 }
 
-.section{
-    display:flex ;
-    flex-direction: row;
+.kotak1{
+    display: flex ;
+    justify-content: space-between;
 }
+
+/* .section{
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-around;
+} */

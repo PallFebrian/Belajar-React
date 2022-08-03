@@ -2,6 +2,7 @@ import React from "react";
 import Produk from "./latihan1/latihan1";
 
 
+
 // function App() {
 //   return (
 //     <React.Fragment>
@@ -15,10 +16,10 @@ import Produk from "./latihan1/latihan1";
 // export default App;
 
 function App(){
-  let [produk,setProduk] = React.useState([
+  let [produk, setProduk] = React.useState([
     {
       jenis:"Elektronik",
-      produlsi:"handphone",
+      produksi:"handphone",
       brand: [
         {
           nama:"samsung",
@@ -32,7 +33,7 @@ function App(){
     },
     {
       jenis:"Tranportasi",
-      produlsi:"Mobil",
+      produksi:"Mobil",
       brand: [
         {
           nama:"Toyota",
@@ -50,11 +51,11 @@ function App(){
   return(
     <React.Fragment>
       <h1>latihan 01</h1>
-      <produk data = {produk}/>
+      <Produk data = {produk}/>
     </React.Fragment>
   )
 
 }
 
 
-export default Produk
+export default App

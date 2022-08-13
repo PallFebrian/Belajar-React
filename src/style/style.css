@@ -15,9 +15,9 @@
 .button{
     color: whitesmoke;
     padding: 5px 10px;
-    border: 1px solid purple;
+    border: 1px solid white;
     cursor: pointer;
-    width: 200px;
+    width: 145px;
     border-radius: 9px;
 }
 
@@ -39,4 +39,27 @@
     font-size: 10px;
     font-weight: bold;
 }
+
+.delete{
+    background-color: red;
+    color: white;
+    width: 50%;
+    border-radius: 7px;     
+}
+
+.update{
+    background-color: blue;
+    color: white;
+    width: 50%;
+    border-radius: 7px;
+}
+
+.index{
+    border: 1px solid grey ;
+    width: 400px;
+    box-shadow: 5px 5px;
+    height: 300px;
+    border-radius: 25px;
+}
+
 

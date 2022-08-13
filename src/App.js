@@ -7,14 +7,18 @@ import Card from "./komponen/card";
 
 export default function App() {
   const [values, setValues] = React.useState({
-    name: "",
+    nama: "",
     email: "",
+    tempatLahir: "",
+    tanggalLahir: "",
+    jenisKelamin: "",
     password: "",
     confirmPassword: "",
   });
 
   const [data, setData] = React.useState([]);
   const [errors, setError] = React.useState({});
+
 
   const handleBlur = (e) => {
     e.preventDefault();
@@ -56,7 +60,7 @@ export default function App() {
     e.preventDefault();
     console.log("form submit");
 
-    values.id = new Date().getTime()
+    values.id = new Date().getTime();
     setData((data) => {
       return [...data, values];
     });
@@ -74,14 +78,14 @@ export default function App() {
   console.log("error", errors);
   return (
     <React.Fragment style={{}}>
-      <div style={{ display: "flex", background: "#F1F3F6", height: "100vh" }}>
-        <div style={{ width: "50%" }}>
+      <div className="inputt" style={{ display: "flex", background: "#F1F3F6", height: "100vh" }}>
+        <div style={{ width: "58%" }}>
           <form onSubmit={handleSubmit}>
             <Input
-              isError={errors?.name}
+              isError={errors?.nama}
               textError={"wajib diisi"}
-              name="name"
-              value={values.name}
+              name="nama"
+              value={values.nama}
               label={"Username"}
               placeholder={"Username"}
               onBlur={handleBlur}
@@ -92,8 +96,41 @@ export default function App() {
               textError={"wajib diisi"}
               name="email"
               value={values.email}
-              label={"Email"}
-              placeholder={"Email"}
+              label={"email"}
+              placeholder={"email"}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />{" "}
+            <Input
+              isError={errors?.tempatLahir}
+              textError={"wajib diisi"}
+              name="tempatLahir"
+              value={values.tempatLahir}
+              label={"tempat lahir"}
+              placeholder={"tempat lahir"}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />{" "}
+            <Input
+              type={"Date"}
+              isError={errors?.tanggalLahir}
+              textError={"wajib diisi"}
+              name="tanggalLahir"
+              value={values.tanggalLahir}
+              label={"tanggal lahir"}
+              placeholder={"tanggal lahir"}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+            {""}
+            <Input
+             type={"select"}
+              isError={errors?.jenisKelamin}
+              textError={"wajib diisi"}
+              name="jenisKelamin"
+              value={values.jenisKelamin}
+              label={"jenis kelamin"}
+              placeholder={"jenis kelamin"}
               onBlur={handleBlur}
               onChange={handleChange}
             />{" "}
@@ -102,8 +139,8 @@ export default function App() {
               textError={"wajib diisi"}
               name="password"
               value={values.password}
-              label={"Password"}
-              placeholder={"Password"}
+              label={"password"}
+              placeholder={"password"}
               onBlur={handleBlur}
               onChange={handleChange}
             />{" "}
@@ -117,16 +154,15 @@ export default function App() {
               onBlur={handleBlur}
               onChange={handleChange}
             />{" "}
-            <Button title={"Simpan"} />{" "}
+            <Button className="reset" title={"Reset"} />{" "}
+            <Button className="simpan" color="blue" title={"Simpan"}  />{" "}
           </form>{" "}
         </div>
-        <Card data={data} setData={setData}/>
+        <Card data={data} setData={setData} />
       </div>
     </React.Fragment>
   );
 }
-  
-  
 
 // function App() {
 //   let [count, setCount] = React.useState(0);

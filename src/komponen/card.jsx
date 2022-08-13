@@ -40,7 +40,7 @@ export default function Card({ data, value, setData }) {
               <button
                 className="update"
                 value={item?.id}
-                onClick={handleDelete}
+                // onClick={handleUpdate}
               >
                 Update
               </button>

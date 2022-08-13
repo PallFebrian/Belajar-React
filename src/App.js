@@ -154,7 +154,7 @@ export default function App() {
               onBlur={handleBlur}
               onChange={handleChange}
             />{" "}
-            <Button className="reset" title={"Reset"} />{" "}
+            <Button type-btn btngit  className="reset" title={"Reset"} />{" "}
             <Button className="simpan" color="blue" title={"Simpan"}  />{" "}
           </form>{" "}
         </div>

@@ -40,3 +40,25 @@
     font-weight: bold;
 }
 
+.index{
+    border: 1px solid black;
+    height: 200px;
+    width: 250px;
+    border-radius: 12px ;
+}
+
+.ktk1{
+    height: 25px;
+    width: 200px;
+}
+.ktk2{
+    height: 200px;
+    width: 200px;
+}
+
+.button{
+    margin-left: 38px;
+    background-color: gray;
+}
+
+

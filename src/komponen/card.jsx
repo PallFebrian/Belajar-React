@@ -23,12 +23,11 @@ export default function Card({ data, value, setData }) {
       <div>
         {data?.map((item) => {
           return (
-            <div>
-              <p>Username : {item.name}</p>
-              <p>Email : {item.email}</p>
-              <p>Password : {item.password}</p>
-              <p>Confirm Password : {item.confirmPassword}</p>
-              <button value={item?.id} onClick={handleDelete}>HAPUS</button>
+            <div className="index">
+              <p>{item.name}</p>
+              <p>{item.email}</p>
+              <p>{item.id}</p>
+              <button className="buttonn" value={item?.id} onClick={handleDelete}>HAPUS</button>
             </div>
           );
         })}

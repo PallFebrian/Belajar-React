@@ -4,13 +4,12 @@ import Layout from "./komponen/layout";
 import Input from "./komponen/input";
 import "./style/style.css";
 import Card from "./komponen/card";
+// import TextArea from "./komponen/textArea";
 
 export default function App() {
   const [values, setValues] = React.useState({
     name: "",
     email: "",
-    password: "",
-    confirmPassword: "",
   });
 
   const [data, setData] = React.useState([]);
@@ -61,66 +60,47 @@ export default function App() {
       return [...data, values];
     });
 
-    // setValues((values) => {
-    //   return {
-    //     name: "",
-    //     email: "",
-    //     password: "",
-    //     confirmPassword: "",
-    //   };
-    // });
+    setValues((values) => {
+      return {
+        name: "",
+        email: "",
+      };
+    });
   };
 
   console.log("error", errors);
   return (
     <React.Fragment style={{}}>
-      <div style={{ display: "flex", background: "#F1F3F6", height: "100vh" }}>
-        <div style={{ width: "50%" }}>
+      <div className="indx" style={{ display: "flex", background: "#F1F3F6", height: "100vh" }}>
+        <div style={{ width: "58%" }}>
           <form onSubmit={handleSubmit}>
             <Input
               isError={errors?.name}
               textError={"wajib diisi"}
               name="name"
               value={values.name}
-              label={"Username"}
-              placeholder={"Username"}
+              label={"Judul"}
+              placeholder={"Judul"}
               onBlur={handleBlur}
               onChange={handleChange}
             />{" "}
             <Input
+                style={{height:'200px'}}
               isError={errors?.email}
               textError={"wajib diisi"}
               name="email"
               value={values.email}
-              label={"Email"}
-              placeholder={"Email"}
+              label={"Catatan"}
+              placeholder={"Catatan"}
               onBlur={handleBlur}
               onChange={handleChange}
             />{" "}
-            <Input
-              isError={errors?.password}
-              textError={"wajib diisi"}
-              name="password"
-              value={values.password}
-              label={"Password"}
-              placeholder={"Password"}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />{" "}
-            <Input
-              isError={errors?.confirmPassword}
-              textError={"wajib diisi"}
-              name="confirmPassword"
-              value={values.confirmPassword}
-              label={"Konfirmasi Password"}
-              placeholder={"Ulangi Password"}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />{" "}
+            
             <Button title={"Simpan"} />{" "}
           </form>{" "}
         </div>
         <Card data={data} setData={setData}/>
+        {/* <TextArea isError={'isError'}textError={'textError'}/> */}
       </div>
     </React.Fragment>
   );

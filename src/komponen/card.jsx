@@ -24,7 +24,7 @@ export default function Card({ data, value, setData }) {
         {data?.map((item) => {
           return (
             <div>
-              <p>Username : {item.username}</p>
+              <p>Username : {item.name}</p>
               <p>Email : {item.email}</p>
               <p>Password : {item.password}</p>
               <p>Confirm Password : {item.confirmPassword}</p>

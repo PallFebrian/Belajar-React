@@ -9,7 +9,6 @@ export default function App() {
     id: "",
     title: "",
     body: "",
-    tahun: "",
     archived: false,
     createdAt: "",
   });
@@ -27,7 +26,7 @@ export default function App() {
       };
     });
     setFormError("");
-    setFormError();
+
     handleBlur(e);
   };
 
@@ -69,12 +68,7 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      values.title === "" ||
-      values.body === "" ||
-      values.tahun < 2020 ||
-      values.tahun > 2022
-    ) {
+    if (values.title === "" || values.body === "") {
       setFormError("Form Wajib di isi");
       if (values.title === "") {
         setErrors((errors) => {
@@ -92,23 +86,6 @@ export default function App() {
           };
         });
       }
-      if (values.tahun < 2020) {
-        setErrors((errors) => {
-          return {
-            ...errors,
-            tahun: true,
-          };
-        });
-        if (values.tahun > 2023) {
-          setErrors((errors) => {
-            return {
-              ...errors,
-              tahun: true,
-            };
-          });
-        }
-      }
-
       return;
     }
 
@@ -121,7 +98,6 @@ export default function App() {
         id: "",
         title: "",
         body: "",
-        tahun: "",
         archived: false,
         createdAt: "",
       };
@@ -165,18 +141,7 @@ export default function App() {
               onBlur={handleBlur}
               error={errors.body}
             />
-            <Input
-              type="number"
-              name={"tahun"}
-              id="input"
-              value={values.tahun}
-              title={"Tahun"}
-              placeholder="Tahun Terbit"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.tahun}
-            />
-
+           
             <Button title="Simpan" />
           </form>
         </div>
@@ -194,7 +159,6 @@ export default function App() {
                       handleDelete={handleDelete}
                       title={item.title}
                       body={item.body}
-                      tahun={item.tahun}
                       createdAt={item.createdAt}
                       id={item.id}
                     />

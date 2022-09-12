@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 export default function User() {
   const [users, setUsers] = React.useState([]); // state  untuk menyimpan data user dari API
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(100);
 
   const getUserHandle = async () => {
     try {
       const response = await axios.get(
-        `https://reqres.in/api/users?page=${page}`
+        `https://belajar-react.smkmadinatulquran.sch.id/api/users/${page}`
       );
       console.log("response =>", response.data);
       setUsers(response.data.data);
@@ -25,15 +27,19 @@ export default function User() {
   return (
     <div>
       <h1>Tabel User</h1>
-      <table className="table-auto">
+      <button><Link to="/user/create"><p className="bg-blue-400">Tambah Use</p></Link></button>
+      
+      <table className="table-auto w-[1000px]">
         <thead>
           <tr className="text-left border">
             <th className="">No</th>
+            <th>Id</th>
+            <th>Username</th>
             <th>Email</th>
-            <th>Frist Name</th>
-            <th>Last Name</th>
-            <th>Avatar</th>
-            <th>Detail</th>
+            <th>Name</th>
+            <th>Jenis Kelamin</th>
+            <th>Stored at</th>
+            <th>Update at</th>
           </tr>
         </thead>
         <tbody>
@@ -41,16 +47,20 @@ export default function User() {
             return (
               <tr key={index} className="text-left border">
                 <td>{index + 1}</td>
+                <td>{user.id}</td>
+                <td>{user.username}</td>
                 <td>{user.email}</td>
-                <td>{user.first_name}</td>
-                <td>{user.last_name}</td>
-                <td>
+                <td>{user.name}</td>
+                <td>{user.jenis_kelamin}</td>
+                <td>{user.stored_at}</td>
+                <td>{user.update_at}</td>
+                {/* <td>
                   <img
                     className="rounded-full h-5 w-5"
                     src={user.avatar}
                     alt={users.avatar}
                   />
-                </td>
+                </td> */}
                 <td>Detail</td>
               </tr>
             );

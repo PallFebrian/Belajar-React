@@ -1,14 +1,13 @@
 import React from "react";
 import axios from "axios";
+import Card from "./card";
 export default function Surah() {
   const [surah, setSurah] = React.useState([]); // state  untuk menyimpan data user dari API
   const [page, setPage] = React.useState(1);
 
   const getUserHandle = async () => {
     try {
-      const response = await axios.get(
-        `https://equran.id/api/surat`
-      );
+      const response = await axios.get(`https://equran.id/api/surat`);
       console.log("response =>", response);
       setSurah(response.data);
       setPage(response.data);
@@ -23,34 +22,25 @@ export default function Surah() {
   }, [page]);
 
   return (
-    <div className="bg-midnight text-tahiti">
-      <h1>Tabel User</h1>
-      <table className="table-auto">
-        <thead>
-          <tr className="text-left border">
-            <th className="">No</th>
-            <th>Nama</th>
-            <th>Nama Latin</th>
-            <th>Jumlah Ayat</th>
-            <th>Tempat Turun</th>
-            <th>Arti</th>
-          </tr>
-        </thead>
-        <tbody>
+    <section className="bg-gray-800 w-screen h-full px-10 py-10 pb-10">
+        <div className="flex justify-center">
+          <section className="grid grid-cols-1 gap-4">
           {surah.map((surah, index) => {
-            return (
-              <tr key={index} className="text-left border">
-                <td>{index + 1}</td>
-                <td>{surah.nama}</td>
-                <td>{surah.nama_latin}</td>
-                <td>{surah.jumlah_ayat}</td>
-                <td>{surah.tempat_turun}</td>
-                <td>{surah.arti}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+          return (
+            <div>
+              <Card
+                nomor={index + 1}
+                nama={surah.nama}
+                namaLatin={surah.nama_latin}
+                jumlahAyat={surah.jumlah_ayat}
+                tempatTurun={surah.tempat_turun}
+                arti={surah.arti}
+              />
+            </div>
+          );
+        })}
+          </section>
+        </div>
+      </section>
   );
 }

@@ -7,7 +7,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <h1 className="bg-red-500">Latihan</h1>
+      {/* <h1 className="bg-red-500">Latihan</h1> */}
       <Routes>
         <Route path="/user" element={<User/>}/>
         <Route path="/user/:id/detail" element={<DetailUser/>}/>

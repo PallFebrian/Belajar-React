@@ -1,10 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import Button from "../komponen/button";
 
 export default function User() {
   const [users, setUsers] = React.useState([]); // state  untuk menyimpan data user dari API
   const [page, setPage] = React.useState(100);
+
+  let navigate = useNavigate();
 
   const getUserHandle = async () => {
     try {
@@ -14,7 +17,9 @@ export default function User() {
       console.log("response =>", response.data);
       setUsers(response.data.data);
       setPage(response.data.page);
-    } catch (err) {}
+    } catch (err) {
+      
+    }
   };
 
   console.log("user =>", users);
@@ -27,9 +32,13 @@ export default function User() {
   return (
     <div>
       <h1>Tabel User</h1>
-      <button><Link to="/user/create"><p className="bg-blue-400">Tambah Use</p></Link></button>
-      
-      <table className="table-auto w-[1000px]">
+      <button>
+        <Link to="/user/create">
+          <p className="bg-gray-400 border-b-indigo-900 rounded-full color-white">Tambah User</p>
+        </Link>
+      </button>
+
+      <table className="table-auto w-full">
         <thead>
           <tr className="text-left border">
             <th className="">No</th>
@@ -40,13 +49,14 @@ export default function User() {
             <th>Jenis Kelamin</th>
             <th>Stored at</th>
             <th>Update at</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user, index) => {
             return (
-              <tr key={index} className="text-left border">
-                <td>{index + 1}</td>
+              <tr key={index} className="border text-center ">
+                <td className="py-2">{index + 1}</td>
                 <td>{user.id}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
@@ -54,14 +64,16 @@ export default function User() {
                 <td>{user.jenis_kelamin}</td>
                 <td>{user.stored_at}</td>
                 <td>{user.update_at}</td>
-                {/* <td>
-                  <img
-                    className="rounded-full h-5 w-5"
-                    src={user.avatar}
-                    alt={users.avatar}
+                <td className="rounded-full ">
+                  <Button
+                    onClick={() => {
+                      return navigate(`/user/update/${user.id}`);
+                    }}
+                    color="blue"
+                    title={"EDIT"}
                   />
-                </td> */}
-                <td>Detail</td>
+                  <Button color="red" title={"DELETE"} />
+                </td>
               </tr>
             );
           })}

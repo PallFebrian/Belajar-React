@@ -1,5 +1,42 @@
 .input{
-    background-color: cornsilk;
+    display: flex;
+    justify-content: center;
     padding: 5px 10px;
-    border: 1px solid red;
+    color: purple;
+    border-radius: 9px;
 }
+
+.layout{
+    padding: 5px 10px;
+    border: 1px solid purple;
+    
+}
+
+.button{
+    color: whitesmoke;
+    padding: 5px 10px;
+    border: 1px solid purple;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 9px;
+}
+
+.input{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-text{
+    padding: 5px 5px;
+    border-radius: 3px;
+    width: 95%;
+}
+
+.error{
+    color: red;
+    font-style: italic;
+    font-size: 10px;
+    font-weight: bold;
+}
+

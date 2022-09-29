@@ -5,6 +5,8 @@ import axios from "axios";
 import {useNavigate, Link} from 'react-router-dom'
 import Select from './select'
 import Swal from "sweetalert2";
+import { createUser } from "../api/user";
+
 
 export default function CreateUser() {
     let navigate = useNavigate()
@@ -27,11 +29,12 @@ export default function CreateUser() {
       };
     });
   };
-  const handleSubmit = async() => {
+  const handleSubmit = async(e) => {
+    e.preventDefault()
     console.log(users);
     try {
         setIsLoading(true)
-        const response = await axios.post('https://belajar-react.smkmadinatulquran.sch.id/api/users/create', users)
+        const response = await createUser(users)
         setIsLoading(false)
         return navigate('/user')
     } catch (err) {

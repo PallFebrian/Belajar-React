@@ -4,12 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../module/button";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
+import { getAllUser } from "../api/user";
+
 
 export default function User() {
   let navigate = useNavigate();
-  const [users, setUsers] = React.useState([]);
-  //state untuk menyimpan data user dari api
-
+  const [users, setUsers] = React.useState([]);   //state untuk menyimpan data user dari api
   const [page, setPage] = React.useState(100);
   const [isFetchUser, setIsFetchUser] = React.useState(false);
 
@@ -17,9 +17,7 @@ export default function User() {
   const getUserHandle = async () => {
     try {
       setIsFetchUser(true);
-      const response = await axios.get(
-        `https://belajar-react.smkmadinatulquran.sch.id/api/users/${page}`
-      );
+      const response = await getAllUser(page)
       console.log("response => ", response.data);
       setUsers(response.data.data);
     } catch (err) {

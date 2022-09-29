@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../module/button";
 import Swal from "sweetalert2";
-import Skeleton from 'react-loading-skeleton'
+import Skeleton from "react-loading-skeleton";
 
 export default function User() {
   let navigate = useNavigate();
@@ -11,22 +11,21 @@ export default function User() {
   //state untuk menyimpan data user dari api
 
   const [page, setPage] = React.useState(100);
-     const [isFetchUser,setIsFetchUser] = React.useState(false)
+  const [isFetchUser, setIsFetchUser] = React.useState(false);
 
 
   const getUserHandle = async () => {
     try {
-        setIsFetchUser(true)
+      setIsFetchUser(true);
       const response = await axios.get(
         `https://belajar-react.smkmadinatulquran.sch.id/api/users/${page}`
       );
       console.log("response => ", response.data);
       setUsers(response.data.data);
-      setPage(response.data.page);
     } catch (err) {
-        console.log(err)
-    }finally{
-        setIsFetchUser(false)
+      console.log(err);
+    } finally {
+      setIsFetchUser(false);
     }
   };
 
@@ -47,9 +46,9 @@ export default function User() {
           );
 
           Swal.fire("Deleted!", "User has been deleted.", "success");
-          getUserHandle()
+          getUserHandle();
         } catch (err) {
-            Swal.fire("Failed!", "User is undefined", "error");
+          Swal.fire("Failed!", "User is undefined", "error");
         }
       }
     });
@@ -80,40 +79,47 @@ export default function User() {
           </tr>
         </thead>
         <tbody>
-          {!isFetchUser ? <tr>
-            <td colSpan={9}>
-            <Skeleton count={15}  highlightColor="#444" height={40}  baseColor="grey"/>
-            
-            </td>
-          </tr> : users.map((user, index) => {
-            return (
-              <tr key={index} className="border">
-                <td>{index + 1}</td>
-                <td>{user.username}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.jenis_kelamin}</td>
-                <td>{user.stored_at}</td>
-                <td>{user.update_at}</td>
-                <td>
-                  <Button
-                    onClick={() => {
-                      return navigate(`/user/update/${user.id}`);
-                    }}
-                    color="blue"
-                    title={"Edit"}
-                  />
-                  <Button
-                    onClick={() => {
-                      deleteUserHandle(user.id);
-                    }}
-                    color="red"
-                    title={"Delete"}
-                  />
-                </td>
-              </tr>
-            );
-          })}
+          {isFetchUser ? (
+            <tr>
+              <td colSpan={9}>
+                <Skeleton
+                  count={15}
+                  highlightColor="#444"
+                  height={40} //baseColor="grey" buat warna pas loading
+                />
+              </td>
+            </tr>
+          ) : (
+            users.map((user, index) => {
+              return (
+                <tr key={index} className="border">
+                  <td>{index + 1}</td>
+                  <td>{user.username}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.jenis_kelamin}</td>
+                  <td>{user.stored_at}</td>
+                  <td>{user.update_at}</td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        return navigate(`/user/update/${user.id}`);
+                      }}
+                      color="blue"
+                      title={"Edit"}
+                    />
+                    <Button
+                      onClick={() => {
+                        deleteUserHandle(user.id);
+                      }}
+                      color="red"
+                      title={"Delete"}
+                    />
+                  </td>
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </table>
       <p>Saat ini di Page {page}</p>

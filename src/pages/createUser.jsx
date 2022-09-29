@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 export default function CreateUser() {
     let navigate = useNavigate()
   const [isLoading, setIsLoading] = React.useState(false);
+  const [errorMessage,setErrorMessage] = React.useState('')
+  const [error,setError] = React.useState({})
   const [users, setUsers] = React.useState({
     username: "",
     email: "",
@@ -35,7 +37,9 @@ export default function CreateUser() {
     } catch (err) {
         console.log(err);
         setIsLoading(false)
-        alert('Error!!')
+        setErrorMessage('error')
+        setError(err?.response?.data?.error)
+  
     }
   }
   const succesHandle = (id) => {
@@ -49,8 +53,9 @@ Swal.fire({
   };
 
   return (
-    <div>
+    <div className="table-auto w-full ">
       <h1>Tambah User</h1>
+      <p className="text-red-600 italic">{errorMessage}</p>
       <form onSubmit={handleSubmit}>
         <Input 
           value={users.username} 
@@ -59,6 +64,7 @@ Swal.fire({
           name={"username"} 
           onChange={handleChange} 
         />
+        <p className="text-red-600 italic">{error?.username?.[0]}</p>
         <Input 
           value={users.name} 
           label={"name"} 
@@ -66,6 +72,7 @@ Swal.fire({
           name={"name"} 
           onChange={handleChange} 
         />
+        <p className="text-red-600 italic">{error?.name?.[1]}</p>
         <Input 
           value={users.email} 
           label={"email"} 
@@ -74,6 +81,7 @@ Swal.fire({
           name={"email"} 
           onChange={handleChange} 
         />
+        <p className="text-red-600 italic">{error?.email?.[2]}</p>
         <Select
           value={users.jenis_kelamin}
           label={'jenis_kelamin'}
@@ -85,6 +93,7 @@ Swal.fire({
           <option value={'laki-laki'}>laki-laki</option>
           <option value={'perempuan'}>perempuan</option>
         </Select>
+        <p className="text-red-600 italic">{error?.jenis_kelamin?.[3]}</p>
         <Input 
           value={users.password} 
           label={"password"} 
@@ -92,6 +101,7 @@ Swal.fire({
           name={'password'} 
           onChange={handleChange}
         />
+        <p className="text-red-600 italic">{error?.password?.[4]}</p>
         <Input 
           value={users.password_confirmation} 
           label={"confirm password"} 
@@ -99,6 +109,7 @@ Swal.fire({
           name={'password_confirmation'} 
           onChange={handleChange}
         />
+        <p className="text-red-600 italic">{error?.password_confirmation?.[5]}</p>
         <Button title={isLoading ? 'Saving Data' : 'Save'}  onClick={() => {
                       succesHandle(2);
                     }} />

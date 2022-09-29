@@ -45,15 +45,15 @@ export default function CreateUser() {
   
     }
   }
-  const succesHandle = (id) => {
-Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  title: 'Your work has been saved',
-  showConfirmButton: false,
-  timer: 1500
-})
-  };
+//   const succesHandle = (id) => {
+// Swal.fire({
+//   position: 'top-end',
+//   icon: 'success',
+//   title: 'Your work has been saved',
+//   showConfirmButton: false,
+//   timer: 1500
+// })
+//   };
 
   return (
     <div className="table-auto w-full ">
@@ -75,7 +75,7 @@ Swal.fire({
           name={"name"} 
           onChange={handleChange} 
         />
-        <p className="text-red-600 italic">{error?.name?.[1]}</p>
+        <p className="text-red-600 italic">{error?.name?.[0]}</p>
         <Input 
           value={users.email} 
           label={"email"} 
@@ -84,7 +84,7 @@ Swal.fire({
           name={"email"} 
           onChange={handleChange} 
         />
-        <p className="text-red-600 italic">{error?.email?.[2]}</p>
+        <p className="text-red-600 italic">{error?.email?.[0]}</p>
         <Select
           value={users.jenis_kelamin}
           label={'jenis_kelamin'}
@@ -96,7 +96,7 @@ Swal.fire({
           <option value={'laki-laki'}>laki-laki</option>
           <option value={'perempuan'}>perempuan</option>
         </Select>
-        <p className="text-red-600 italic">{error?.jenis_kelamin?.[3]}</p>
+        <p className="text-red-600 italic">{error?.jenis_kelamin?.[0]}</p>
         <Input 
           value={users.password} 
           label={"password"} 
@@ -104,7 +104,7 @@ Swal.fire({
           name={'password'} 
           onChange={handleChange}
         />
-        <p className="text-red-600 italic">{error?.password?.[4]}</p>
+        <p className="text-red-600 italic">{error?.password?.[0]}</p>
         <Input 
           value={users.password_confirmation} 
           label={"confirm password"} 
@@ -112,10 +112,12 @@ Swal.fire({
           name={'password_confirmation'} 
           onChange={handleChange}
         />
-        <p className="text-red-600 italic">{error?.password_confirmation?.[5]}</p>
-        <Button title={isLoading ? 'Saving Data' : 'Save'}  onClick={() => {
-                      succesHandle(2);
-                    }} />
+        <p className="text-red-600 italic">{error?.password_confirmation?.[0]}</p>
+        <Button title={isLoading ? 'Saving Data' : 'Save'} 
+        //  onClick={() => {
+        //               succesHandle(2);
+        //             }} 
+                    />
         <Link to={'/user'} className='pl-5'>
           <Button title={'Back to user'}/>
         </Link>

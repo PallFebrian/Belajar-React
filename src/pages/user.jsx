@@ -3,27 +3,30 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../module/button";
 import Swal from "sweetalert2";
-import Skeleton from "react-loading-skeleton";
-import { getAllUser } from "../api/user";
-
+import Skeleton from 'react-loading-skeleton'
+import {getAllUser, deleteUser} from '../api/user';
+import Cookies from "js-cookie";
 
 export default function User() {
   let navigate = useNavigate();
-  const [users, setUsers] = React.useState([]);   //state untuk menyimpan data user dari api
-  const [page, setPage] = React.useState(100);
-  const [isFetchUser, setIsFetchUser] = React.useState(false);
+  const [users, setUsers] = React.useState([]);
+  //state untuk menyimpan data user dari api
 
+  const [page, setPage] = React.useState(150);
+  // const [perPage, setPerPage] = React.useState(2);
+  const [isFetchUser, setIsFetchUser] = React.useState(false)
+  
 
   const getUserHandle = async () => {
     try {
-      setIsFetchUser(true);
+      setIsFetchUser(true)
       const response = await getAllUser(page)
       console.log("response => ", response.data);
       setUsers(response.data.data);
     } catch (err) {
-      console.log(err);
-    } finally {
-      setIsFetchUser(false);
+
+    }finally{
+      setIsFetchUser(false)
     }
   };
 
@@ -39,21 +42,23 @@ export default function User() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(
-            `https://belajar-react.smkmadinatulquran.sch.id/api/users/hapus/${id}`
-          );
-
-          Swal.fire("Deleted!", "User has been deleted.", "success");
-          getUserHandle();
-        } catch (err) {
-          Swal.fire("Failed!", "User is undefined", "error");
+          const response = await deleteUser(id)
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          console.log("delete working", id);
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: '<a href="">Why do I have this issue?</a>',
+          });
         }
       }
     });
   };
 
-  console.log("user => ", users);
-  console.log("page => ", page);
+  // console.log("user => ", users);
+  // console.log("page => ", page);
 
   React.useEffect(() => {
     getUserHandle();
@@ -62,8 +67,17 @@ export default function User() {
   return (
     <div>
       <h1>User who is accepted</h1>
-      <Link to="/user/create">Add User</Link>
-      <table className="table-auto w-full ">
+      <Link to="/user/create" className="mr-5">
+        <Button title={"Add User"} />
+      </Link>
+      <Button 
+        title='Logout'
+        onClick={() => {
+          Cookies.remove("myapps_token")
+          return navigate("/login", {replace:true})
+        }}
+      />
+      <table className="table-auto w-full">
         <thead>
           <tr className="text-left border">
             <th className="pr-5">No</th>
@@ -77,7 +91,7 @@ export default function User() {
           </tr>
         </thead>
         <tbody>
-          {isFetchUser ? (
+        {isFetchUser ? (
             <tr>
               <td colSpan={9}>
                 <Skeleton
@@ -122,26 +136,6 @@ export default function User() {
       </table>
       <p>Saat ini di Page {page}</p>
 
-      <div className="flex items-center justify-center">
-        <button
-          className="mx-10"
-          onClick={() => {
-            console.log("running?");
-            setPage(page - 1);
-          }}
-        >
-          Previos
-        </button>
-        <button
-          className="mx-10"
-          onClick={() => {
-            console.log("running?");
-            setPage(page + 1);
-          }}
-        >
-          Next
-        </button>
-      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import Button from "../module/button";
 import axios from "axios";
 import {useNavigate, Link, useParams} from 'react-router-dom'
 import Select from './select'
-import { updateUser, userDetail } from "../api/user";
+import {updateUser, detailUser} from '../api/user'
 
 export default function UpdateUser() {
     let navigate = useNavigate()
@@ -14,7 +14,7 @@ export default function UpdateUser() {
     username: "",
     email: "",
     name: "",
-    jenis_kelamin: "laki-laki",
+    jenis_kelamin: "",
   });
   const handleChange = (e) => {
     setUsers((users) => {
@@ -24,7 +24,8 @@ export default function UpdateUser() {
       };
     });
   };
-  const handleSubmit = async() => {
+  const handleSubmit = async(e) => {
+    e.preventDefault()
     console.log(users);
     try {
         setIsLoading(true)
@@ -39,7 +40,7 @@ export default function UpdateUser() {
   }
   const getDetailUser = async() => {
     try {
-        const response  = await userDetail(id)
+        const response  = await detailUser(id)
         console.log( 'response => ',response.data);
         const dataUser = response.data.data
         console.log(dataUser);

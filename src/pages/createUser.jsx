@@ -4,20 +4,18 @@ import Button from "../module/button";
 import axios from "axios";
 import {useNavigate, Link} from 'react-router-dom'
 import Select from './select'
-import Swal from "sweetalert2";
-import { createUser } from "../api/user";
-
+import {createUser} from '../api/user';
 
 export default function CreateUser() {
     let navigate = useNavigate()
   const [isLoading, setIsLoading] = React.useState(false);
-  const [errorMessage,setErrorMessage] = React.useState('')
-  const [error,setError] = React.useState({})
+  const [errorMessage, setErrorMessage] = React.useState('')
+  const [error, setError] = React.useState({})
   const [users, setUsers] = React.useState({
     username: "",
     email: "",
     name: "",
-    jenis_kelamin: "laki-laki",
+    jenis_kelamin: "",
     password: "",
     password_confirmation: "",
   });
@@ -36,30 +34,23 @@ export default function CreateUser() {
         setIsLoading(true)
         const response = await createUser(users)
         setIsLoading(false)
-        return navigate('/user')
+        // return navigate('/user')
     } catch (err) {
         console.log(err);
+        setError(err?.response?.data?.errors)
         setIsLoading(false)
-        setErrorMessage('error')
-        setError(err?.response?.data?.error)
-  
-    }
+        setErrorMessage('Error Error Error')
+    } 
   }
-//   const succesHandle = (id) => {
-// Swal.fire({
-//   position: 'top-end',
-//   icon: 'success',
-//   title: 'Your work has been saved',
-//   showConfirmButton: false,
-//   timer: 1500
-// })
-//   };
-
+  console.log("error semua", error);
   return (
-    <div className="table-auto w-full ">
+    <div>
       <h1>Tambah User</h1>
-      <p className="text-red-600 italic">{errorMessage}</p>
+      {/* <p className="text-red-500">
+        {errorMessage}
+      </p> */}
       <form onSubmit={handleSubmit}>
+      <p className="text-red-500">{error?.username?.[0]}</p>
         <Input 
           value={users.username} 
           label={"username"} 
@@ -67,7 +58,7 @@ export default function CreateUser() {
           name={"username"} 
           onChange={handleChange} 
         />
-        <p className="text-red-600 italic">{error?.username?.[0]}</p>
+        <p className="text-red-500">{error?.name?.[0]}</p>
         <Input 
           value={users.name} 
           label={"name"} 
@@ -75,7 +66,7 @@ export default function CreateUser() {
           name={"name"} 
           onChange={handleChange} 
         />
-        <p className="text-red-600 italic">{error?.name?.[0]}</p>
+        <p className="text-red-500">{error?.email?.[0]}</p>
         <Input 
           value={users.email} 
           label={"email"} 
@@ -84,7 +75,7 @@ export default function CreateUser() {
           name={"email"} 
           onChange={handleChange} 
         />
-        <p className="text-red-600 italic">{error?.email?.[0]}</p>
+        <p className="text-red-500">{error?.jenis_kelamin?.[0]}</p>
         <Select
           value={users.jenis_kelamin}
           label={'jenis_kelamin'}
@@ -96,7 +87,7 @@ export default function CreateUser() {
           <option value={'laki-laki'}>laki-laki</option>
           <option value={'perempuan'}>perempuan</option>
         </Select>
-        <p className="text-red-600 italic">{error?.jenis_kelamin?.[0]}</p>
+        <p className="text-red-500">{error?.password?.[0]}</p>
         <Input 
           value={users.password} 
           label={"password"} 
@@ -104,7 +95,6 @@ export default function CreateUser() {
           name={'password'} 
           onChange={handleChange}
         />
-        <p className="text-red-600 italic">{error?.password?.[0]}</p>
         <Input 
           value={users.password_confirmation} 
           label={"confirm password"} 
@@ -112,12 +102,7 @@ export default function CreateUser() {
           name={'password_confirmation'} 
           onChange={handleChange}
         />
-        <p className="text-red-600 italic">{error?.password_confirmation?.[0]}</p>
-        <Button title={isLoading ? 'Saving Data' : 'Save'} 
-        //  onClick={() => {
-        //               succesHandle(2);
-        //             }} 
-                    />
+        <Button title={isLoading ? 'Saving Data' : 'Save'} />
         <Link to={'/user'} className='pl-5'>
           <Button title={'Back to user'}/>
         </Link>

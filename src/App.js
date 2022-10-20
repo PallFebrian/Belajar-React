@@ -12,6 +12,7 @@ import Artikel from "./pages/artikel";
 import CreateArtikel from "./pages/artikel/createArtikel";
 // import UpdateArtikel from "./pages/artikel/updateArtikel";
 import DetailArtikel from "./pages/artikel/detailArtikel";
+import EditArtikel from "./pages/artikel/editArtikel";
 
 function App() {
   return (
@@ -24,6 +25,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Artikel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/artikel/edit/:slug"
+          element={
+            <ProtectedRoute>
+              <EditArtikel />
             </ProtectedRoute>
           }
         />

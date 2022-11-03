@@ -13,11 +13,16 @@ import CreateArtikel from "./pages/artikel/createArtikel";
 // import UpdateArtikel from "./pages/artikel/updateArtikel";
 import DetailArtikel from "./pages/artikel/detailArtikel";
 import EditArtikel from "./pages/artikel/editArtikel";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function App() {
+
+  const color = useSelector((state)=>state.color)
+  console.log('color',color.color)
   return (
     <React.Fragment>
-      <h1 className="bg-red-500">API Training</h1>
+      <h1 style={{background:color.color}}>API Training</h1>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route

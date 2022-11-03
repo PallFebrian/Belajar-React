@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import Skeleton from 'react-loading-skeleton'
 import {getAllUser, deleteUser} from '../api/user';
 import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { increment,decrement } from "../redux/action/countAction";
+
 
 export default function User() {
   let navigate = useNavigate();
@@ -15,7 +18,11 @@ export default function User() {
   const [page, setPage] = React.useState(150);
   // const [perPage, setPerPage] = React.useState(2);
   const [isFetchUser, setIsFetchUser] = React.useState(false)
-  
+  const store = useSelector((state)=>state)
+  const count = useSelector((state)=>state.count)
+  console.log('store=>', store)
+  const dispatch = useDispatch()
+
 
   const getUserHandle = async () => {
     try {
@@ -77,6 +84,24 @@ export default function User() {
           return navigate("/login", {replace:true})
         }}
       />
+        <Button onClick={()=>{
+              dispatch({
+                type : "change",
+                color : "#7cfc00"
+              })
+            }} color="green" title={'green'} />
+            <Button onClick={()=>{
+              dispatch({
+                type : "change",
+                color : "#806960"
+              })
+            }} color="brown" title={'bron'} />
+            <Button  title={'back'} onClick={()=>{
+              dispatch({
+                type : "return",
+                // color : "#7cfc00"
+              })
+            }} />
       <table className="table-auto w-full">
         <thead>
           <tr className="text-left border">
@@ -135,7 +160,17 @@ export default function User() {
         </tbody>
       </table>
       <p>Saat ini di Page {page}</p>
-
+      <div className="border grid grid-cols-1 gap-5">
+          
+            <p> status : {count.status}</p>
+            <p> value : {count.value}</p>
+            <Button onClick={()=>{
+              dispatch(increment())
+            }} title={'tambah'}/>
+            <Button onClick={()=>{
+              dispatch(decrement())
+            }}color="blue" title={'kurang'}/>
+      </div>
     </div>
   );
 }

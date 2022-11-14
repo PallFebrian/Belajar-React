@@ -1,13 +1,18 @@
- import React from "react";
-
-function App() {
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import ReducerMateri from "./useReducer";
+import RefTutorial from "./useRef";
+export default function App() {
+  useEffect(() => {}, []);
   return (
-    <React.Fragment>
-      <h1 className="bg-red-500">Latihan</h1>
-    </React.Fragment>
+    <div className="w-full h-screen bg-slate-600 text-slate-300">
+        <h1 className="bg-[#13b3ac] text-slate-700">HOOK</h1>
+      <RefTutorial/>
+      {/* <Routes>
+        <Route path="/useRef" element={<RefTutorial />} />
+        <Route path="/useReducer" element={<ReducerMateri />} />
+        <Route path="*" element={<Navigate to="/useRef" />} />
+      </Routes> */}
+    </div>
   );
 }
-
-// export nama bisa 1 komponen atau lebih
-
-export default App;

@@ -1,4 +1,5 @@
 import { useLayoutEffect,useEffect } from "react";
+import Parent from "./optimize";
 
 export default function LayoutEffectTutotial(){
 
@@ -10,5 +11,8 @@ export default function LayoutEffectTutotial(){
         console.log("useEffect")
     },[])
 
-    return <div></div>
+    return <div>
+        {console.log('jalan sini')}
+        <Parent/>
+    </div>
 }
